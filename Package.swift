@@ -20,7 +20,8 @@ let package = Package(
         .package(url: "https://github.com/skiptools/skip-bridge.git", "0.17.3"..<"2.0.0"),
         .package(url: "https://github.com/skiptools/skip-android-bridge.git", "0.6.6"..<"2.0.0"),
         .package(url: "https://github.com/skiptools/swift-jni.git", "0.5.0"..<"2.0.0"),
-        .package(url: "https://github.com/skiptools/skip-ui.git", from: "1.61.0"),
+        // Temporary coordinated SDK pin; restore an official release after the haptics PR lands.
+        .package(url: "https://github.com/fianchettochess/skip-ui.git", revision: "36b9ee989203c4d4d2810d4e5f1cc92f401cbcbd"),
     ],
     targets: [
         .target(name: "SkipFuseUI", dependencies: ["SkipSwiftUI"]),
