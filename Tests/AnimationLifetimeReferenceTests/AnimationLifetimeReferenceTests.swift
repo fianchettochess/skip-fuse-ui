@@ -1,6 +1,6 @@
 // Copyright 2026 Skip
 // SPDX-License-Identifier: MPL-2.0
-#if os(macOS)
+#if os(macOS) && !ROBOLECTRIC
 import AppKit
 import SwiftUI
 import XCTest
