@@ -58,7 +58,7 @@ extension Image : SkipUIBridging {
         case .java(let javaImage):
             image = javaImage
         }
-        if let resizingMode = spec.resizingMode {
+        if spec.resizingMode != nil {
             image = image.resizable()
         }
         if let templateRenderingMode = spec.templateRenderingMode {

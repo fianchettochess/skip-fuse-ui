@@ -34,17 +34,17 @@ extension GroupBox where Label == EmptyView, Content : View {
 
 extension GroupBox where Label == Text, Content : View {
     public init(_ titleKey: LocalizedStringKey, @ViewBuilder content: () -> Content) {
-        self.label = Text(titleKey) as? Label
+        self.label = Text(titleKey)
         self.content = content()
     }
 
     @_disfavoredOverload public init(_ titleResource: AndroidLocalizedStringResource, @ViewBuilder content: () -> Content) {
-        self.label = Text(titleResource) as? Label
+        self.label = Text(titleResource)
         self.content = content()
     }
 
     @_disfavoredOverload public init<S>(_ title: S, @ViewBuilder content: () -> Content) where S : StringProtocol {
-        self.label = Text(title) as? Label
+        self.label = Text(title)
         self.content = content()
     }
 }
