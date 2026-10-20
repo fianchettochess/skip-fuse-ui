@@ -35,13 +35,15 @@ extension View {
 
 /// Provides a native wrapper around `SkipUI.Views` that are represented in Compose.
 public struct JavaBackedView : SkipUI.View, JObjectConvertible, SkipUIBridging, @unchecked Sendable {
-    private let ptr: JavaObjectPointer
+    // Content can outlive the JNI frame that supplied it, for example when
+    // a modifier passes its content to a child view.
+    private let object: JObject
 
     public init?(_ ptr: JavaObjectPointer?) {
         guard let ptr else {
             return nil
         }
-        self.ptr = ptr
+        self.object = JObject(ptr)
     }
 
     nonisolated public static func fromJavaObject(_ obj: JavaObjectPointer?, options: JConvertibleOptions) -> Self {
@@ -49,7 +51,8 @@ public struct JavaBackedView : SkipUI.View, JObjectConvertible, SkipUIBridging, 
     }
 
     nonisolated public func toJavaObject(options: JConvertibleOptions) -> JavaObjectPointer? {
-        return ptr
+        // Keep the returned reference valid even if this wrapper is released.
+        return object.safePointer()
     }
 
     public var Java_view: any SkipUI.View {
