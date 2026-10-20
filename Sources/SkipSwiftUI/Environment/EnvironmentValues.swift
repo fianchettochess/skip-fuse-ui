@@ -126,8 +126,6 @@ extension EnvironmentValues {
                 return LegibilityWeight.bold
             case .regular:
                 return LegibilityWeight.regular
-            default:
-                return nil
             }
         case "colorSchemeContrast":
             let rawValue = bridgedValue as? Int
@@ -224,8 +222,6 @@ extension EnvironmentValues {
                 return SkipUI.LegibilityWeight.bold
             case .regular:
                 return SkipUI.LegibilityWeight.regular
-            default:
-                return nil
             }
         case "colorSchemeContrast":
             return (value as? ColorSchemeContrast)?.rawValue
