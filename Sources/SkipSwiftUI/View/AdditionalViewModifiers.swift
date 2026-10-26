@@ -383,7 +383,7 @@ extension View {
 
     nonisolated public func onChange<V>(of value: V, initial: Bool = false, _ action: @escaping (_ oldValue: V, _ newValue: V) -> Void) -> some View where V : Equatable {
         return ModifierView(target: self) {
-            $0.Java_viewOrEmpty.onChange(of: Java_swiftEquatable(for: value), initial: initial) { oldValue, newValue in
+            $0.Java_viewOrEmpty.onChangeErased(of: Java_swiftEquatable(for: value), initial: initial, observationKey: String(reflecting: V.self)) { oldValue, newValue in
                 action(oldValue.base as! V, newValue.base as! V)
             }
         }
@@ -408,7 +408,7 @@ extension View {
             $0.Java_viewOrEmpty.onGeometryChangeErased(of: { jproxy in
                 let proxy = GeometryProxy(javaProxy: jproxy)
                 return Java_swiftEquatable(for: transform(proxy))
-            }) { (oldValue: SwiftEquatable, newValue: SwiftEquatable) in
+            }, observationKey: String(reflecting: T.self)) { (oldValue: SwiftEquatable, newValue: SwiftEquatable) in
                 action(oldValue.base as! T, newValue.base as! T)
             }
         }

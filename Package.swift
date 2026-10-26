@@ -20,7 +20,7 @@ let package = Package(
         .package(url: "https://github.com/skiptools/skip-bridge.git", "0.17.3"..<"2.0.0"),
         .package(url: "https://github.com/skiptools/skip-android-bridge.git", "0.6.6"..<"2.0.0"),
         .package(url: "https://github.com/skiptools/swift-jni.git", "0.5.0"..<"2.0.0"),
-        .package(url: "https://github.com/skiptools/skip-ui.git", from: "1.61.0"),
+        .package(url: "https://github.com/fianchettochess/skip-ui.git", revision: "318edbca363ba6a768417b82367346005781c5cd"),
     ],
     targets: [
         .target(name: "SkipFuseUI", dependencies: ["SkipSwiftUI"]),
