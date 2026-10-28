@@ -3,6 +3,12 @@
 import SkipUI
 
 extension View {
+    nonisolated public func androidLocationContextMenu<MenuItems: View>(@ViewBuilder menuItems: () -> MenuItems, action: @escaping (Double, Double) -> Bool) -> some View {
+        let menuItems = menuItems()
+        return ModifierView(target: self) {
+            $0.Java_viewOrEmpty.androidLocationContextMenu(bridgedMenuItems: menuItems.Java_viewOrEmpty, action: action)
+        }
+    }
     /* @inlinable */ nonisolated public func contextMenu<MenuItems>(@ViewBuilder menuItems: () -> MenuItems) -> some View where MenuItems : View {
         let menuItems = menuItems()
         return ModifierView(target: self) {
