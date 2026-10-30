@@ -32,27 +32,29 @@ public struct SensoryFeedback : Equatable, Sendable {
     public static let impact = SensoryFeedback(identifier: 11) // For bridging
 
     public static func impact(weight: SensoryFeedback.Weight = .medium, intensity: Double = 1.0) -> SensoryFeedback {
-        return .impact
+        return SensoryFeedback(identifier: HapticFeedbackImpact(style: weight.style, intensity: intensity).rawValue)
     }
 
     public static func impact(flexibility: SensoryFeedback.Flexibility, intensity: Double = 1.0) -> SensoryFeedback {
-        return .impact
+        return SensoryFeedback(identifier: HapticFeedbackImpact(style: flexibility.style, intensity: intensity).rawValue)
     }
 
     public struct Weight : Equatable, Sendable {
-        public static let light = SensoryFeedback.Weight()
+        fileprivate let style: HapticFeedbackImpact.Style
+        public static let light = SensoryFeedback.Weight(style: .light)
 
-        public static let medium = SensoryFeedback.Weight()
+        public static let medium = SensoryFeedback.Weight(style: .medium)
 
-        public static let heavy = SensoryFeedback.Weight()
+        public static let heavy = SensoryFeedback.Weight(style: .heavy)
     }
 
     public struct Flexibility : Hashable, Sendable {
-        public static let rigid = SensoryFeedback.Flexibility()
+        fileprivate let style: HapticFeedbackImpact.Style
+        public static let rigid = SensoryFeedback.Flexibility(style: .rigid)
 
-        public static let solid = SensoryFeedback.Flexibility()
+        public static let solid = SensoryFeedback.Flexibility(style: .medium)
 
-        public static let soft = SensoryFeedback.Flexibility()
+        public static let soft = SensoryFeedback.Flexibility(style: .soft)
     }
 }
 
